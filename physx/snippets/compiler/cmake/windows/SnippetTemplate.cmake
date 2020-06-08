@@ -41,9 +41,9 @@ SET(SNIPPET_COMPILE_DEFS
 )
 
 SET(SNIPPET_PLATFORM_SOURCES
-	${PHYSX_ROOT_DIR}/snippets/snippetcommon/ClassicMain.cpp
-	${PHYSX_ROOT_DIR}/snippets/snippetcommon/SnippetPrint.h
-	${PHYSX_ROOT_DIR}/snippets/snippetcommon/SnippetPVD.h
+	${SNIPPETS_ROOT_DIR}/snippetcommon/ClassicMain.cpp
+	${SNIPPETS_ROOT_DIR}/snippetcommon/SnippetPrint.h
+	${SNIPPETS_ROOT_DIR}/snippetcommon/SnippetPVD.h
 )
 
 SET(SNIPPET_PLATFORM_INCLUDES

@@ -41,12 +41,12 @@ SET(SNIPPETRENDER_COMPILE_DEFS
 )
 
 SET(SNIPPETRENDER_PLATFORM_FILES
-	${PHYSX_ROOT_DIR}/snippets/graphics/include/win32/GL/glut.h 
+	${SNIPPETS_ROOT_DIR}/graphics/include/win32/GL/glut.h 
 )
 
 # Include OpenGL
 SET(SNIPPETRENDER_PLATFORM_INCLUDES
-	${PHYSX_ROOT_DIR}/snippets/Graphics/include/win32/GL
+	${SNIPPETS_ROOT_DIR}/Graphics/include/win32/GL
 )
 
-SET(SNIPPETRENDER_PLATFORM_LINKED_LIBS ${PHYSX_ROOT_DIR}/snippets/Graphics/lib/win${LIBPATH_SUFFIX}/glut/glut32.lib opengl32.lib glu32.lib)
+SET(SNIPPETRENDER_PLATFORM_LINKED_LIBS ${SNIPPETS_ROOT_DIR}/Graphics/lib/win${LIBPATH_SUFFIX}/glut/glut32.lib opengl32.lib glu32.lib)

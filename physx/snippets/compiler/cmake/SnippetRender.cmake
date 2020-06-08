@@ -30,13 +30,13 @@
 #
 
 # Include here after the directories are defined so that the platform specific file can use the variables.
-include(${PHYSX_ROOT_DIR}/snippets/${PROJECT_CMAKE_FILES_DIR}/${TARGET_BUILD_PLATFORM}/SnippetRender.cmake)
+include(${SNIPPETS_ROOT_DIR}/${PROJECT_CMAKE_FILES_DIR}/${TARGET_BUILD_PLATFORM}/SnippetRender.cmake)
 
 SET(SNIPPETRENDER_FILES
-	${PHYSX_ROOT_DIR}/snippets/snippetrender/SnippetCamera.cpp
-	${PHYSX_ROOT_DIR}/snippets/snippetrender/SnippetCamera.h
-	${PHYSX_ROOT_DIR}/snippets/snippetrender/SnippetRender.cpp
-	${PHYSX_ROOT_DIR}/snippets/snippetrender/SnippetRender.h
+	${SNIPPETS_ROOT_DIR}/snippetrender/SnippetCamera.cpp
+	${SNIPPETS_ROOT_DIR}/snippetrender/SnippetCamera.h
+	${SNIPPETS_ROOT_DIR}/snippetrender/SnippetRender.cpp
+	${SNIPPETS_ROOT_DIR}/snippetrender/SnippetRender.h
 )
 
 ADD_LIBRARY(SnippetRender STATIC
@@ -44,6 +44,10 @@ ADD_LIBRARY(SnippetRender STATIC
 	
 	${SNIPPETRENDER_PLATFORM_FILES}
 )
+
+target_include_directories(SnippetRender PUBLIC 
+    "/home/eric/projects/physx/PhysX/pxshared/include"
+    )
 
 TARGET_INCLUDE_DIRECTORIES(SnippetRender
 	PRIVATE ${PHYSX_ROOT_DIR}/include
@@ -78,7 +82,7 @@ ENDIF()
 
 
 TARGET_LINK_LIBRARIES(SnippetRender 
-	PUBLIC PhysXFoundation
+	# PUBLIC PhysXFoundation
 	PUBLIC ${SNIPPETRENDER_PLATFORM_LINKED_LIBS})
 
 IF(PX_GENERATE_SOURCE_DISTRO)

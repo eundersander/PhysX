@@ -30,13 +30,13 @@
 #
 
 # Include here after the directories are defined so that the platform specific file can use the variables.
-INCLUDE(${PHYSX_ROOT_DIR}/snippets/${PROJECT_CMAKE_FILES_DIR}/${TARGET_BUILD_PLATFORM}/SnippetVehicleTemplate.cmake)
+INCLUDE(${SNIPPETS_ROOT_DIR}/${PROJECT_CMAKE_FILES_DIR}/${TARGET_BUILD_PLATFORM}/SnippetVehicleTemplate.cmake)
 
 STRING(TOLOWER ${SNIPPET_NAME} SNIPPET_NAME_LOWER)
-FILE(GLOB SnippetSources ${PHYSX_ROOT_DIR}/snippets/snippet${SNIPPET_NAME_LOWER}/*.cpp)
-FILE(GLOB VehicleSources ${PHYSX_ROOT_DIR}/snippets/snippetvehiclecommon/*.cpp)
-FILE(GLOB SnippetHeaders ${PHYSX_ROOT_DIR}/snippets/snippet${SNIPPET_NAME_LOWER}/*.h)
-FILE(GLOB VehicleHeaders ${PHYSX_ROOT_DIR}/snippets/snippetvehiclecommon/*.h)
+FILE(GLOB SnippetSources ${SNIPPETS_ROOT_DIR}/snippet${SNIPPET_NAME_LOWER}/*.cpp)
+FILE(GLOB VehicleSources ${SNIPPETS_ROOT_DIR}/snippetvehiclecommon/*.cpp)
+FILE(GLOB SnippetHeaders ${SNIPPETS_ROOT_DIR}/snippet${SNIPPET_NAME_LOWER}/*.h)
+FILE(GLOB VehicleHeaders ${SNIPPETS_ROOT_DIR}/snippetvehiclecommon/*.h)
 
 ADD_EXECUTABLE(Snippet${SNIPPET_NAME} ${SNIPPET_BUNDLE}
 	${SNIPPET_PLATFORM_SOURCES}

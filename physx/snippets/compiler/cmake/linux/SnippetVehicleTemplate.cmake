@@ -54,7 +54,7 @@ ELSE()
 ENDIF()
 
 SET(SNIPPET_PLATFORM_SOURCES
-	${PHYSX_ROOT_DIR}/snippets/snippetcommon/ClassicMain.cpp
+	${SNIPPETS_ROOT_DIR}/snippetcommon/ClassicMain.cpp
 )
 
 SET(SNIPPET_PLATFORM_INCLUDES

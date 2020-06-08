@@ -28,7 +28,7 @@
 IF(TARGET_BUILD_PLATFORM STREQUAL "mac" OR TARGET_BUILD_PLATFORM STREQUAL "ios")
 	cmake_minimum_required(VERSION 3.12)
 ELSE()
-	cmake_minimum_required(VERSION 3.11)
+	cmake_minimum_required(VERSION 3.10)  # temp
 ENDIF()
 
 project(PhysXSDK C CXX)
@@ -75,6 +75,7 @@ ADD_SUBDIRECTORY(${PHYSX_ROOT_DIR}/source/compiler/cmake ${CMAKE_CURRENT_BINARY_
 MESSAGE("Added PhysX")
 
 IF(PX_BUILDSNIPPETS)
+	message(FATAL_ERROR "trying to build snippets as part of core build")
 	# Add Snippets projects into the solution
 	ADD_SUBDIRECTORY(${PHYSX_ROOT_DIR}/snippets/compiler/cmake ${CMAKE_CURRENT_BINARY_DIR}/sdk_snippets_bin)
 

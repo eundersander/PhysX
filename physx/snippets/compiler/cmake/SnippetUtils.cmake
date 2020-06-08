@@ -30,16 +30,21 @@
 #
 
 # Include here after the directories are defined so that the platform specific file can use the variables.
-INCLUDE(${PHYSX_ROOT_DIR}/snippets/${PROJECT_CMAKE_FILES_DIR}/${TARGET_BUILD_PLATFORM}/SnippetUtils.cmake)
+INCLUDE(${SNIPPETS_ROOT_DIR}/${PROJECT_CMAKE_FILES_DIR}/${TARGET_BUILD_PLATFORM}/SnippetUtils.cmake)
 
 SET(SNIPPETUTILS_FILES
-	${PHYSX_ROOT_DIR}/snippets/snippetutils/SnippetUtils.cpp
-	${PHYSX_ROOT_DIR}/snippets/snippetutils/SnippetUtils.h
+	${SNIPPETS_ROOT_DIR}/snippetutils/SnippetUtils.cpp
+	${SNIPPETS_ROOT_DIR}/snippetutils/SnippetUtils.h
 )
 
 ADD_LIBRARY(SnippetUtils STATIC
 	${SNIPPETUTILS_FILES}
 )
+
+target_include_directories(SnippetUtils PUBLIC 
+    "/home/eric/projects/physx/PhysX/pxshared/include"
+	"/home/eric/projects/physx/PhysX/physx/source/foundation/include"
+    )
 
 TARGET_INCLUDE_DIRECTORIES(SnippetUtils
 	PRIVATE ${SNIPPETUTILS_PLATFORM_INCLUDES}
@@ -76,7 +81,7 @@ ENDIF()
 
 
 TARGET_LINK_LIBRARIES(SnippetUtils 
-	PUBLIC PhysXFoundation
+	# PUBLIC PhysXFoundation
 )	
 
 IF(PX_GENERATE_SOURCE_DISTRO)

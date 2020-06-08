@@ -1,3 +1,6 @@
+
+# message(FATAL_ERROR "nvidia build options!")
+
 # Define the options up front
 
 OPTION(NV_APPEND_CONFIG_NAME "Append config (DEBUG, CHECKED, PROFILE or '' for release) to outputted binaries." OFF)

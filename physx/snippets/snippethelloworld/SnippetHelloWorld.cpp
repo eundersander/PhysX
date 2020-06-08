@@ -68,6 +68,12 @@ PxRigidDynamic* createDynamic(const PxTransform& t, const PxGeometry& geometry, 
 	return dynamic;
 }
 
+#error here
+#error here 1
+#error here PxRigidDynamic* dynamic = PxCreateDynamic(*gPhysics, t, geometry, *gMaterial, 10.0f);
+#error here 3 
+#error here createStack(const PxTransform& t, PxU32 size, PxReal halfExtent)
+
 void createStack(const PxTransform& t, PxU32 size, PxReal halfExtent)
 {
 	PxShape* shape = gPhysics->createShape(PxBoxGeometry(halfExtent, halfExtent, halfExtent), *gMaterial);

@@ -30,11 +30,11 @@
 #
 
 # Include here after the directories are defined so that the platform specific file can use the variables.
-INCLUDE(${PHYSX_ROOT_DIR}/snippets/${PROJECT_CMAKE_FILES_DIR}/${TARGET_BUILD_PLATFORM}/SnippetTemplate.cmake)
+INCLUDE(${SNIPPETS_ROOT_DIR}/${PROJECT_CMAKE_FILES_DIR}/${TARGET_BUILD_PLATFORM}/SnippetTemplate.cmake)
 
 STRING(TOLOWER ${SNIPPET_NAME} SNIPPET_NAME_LOWER)
-FILE(GLOB SnippetSources ${PHYSX_ROOT_DIR}/snippets/snippet${SNIPPET_NAME_LOWER}/*.cpp)
-FILE(GLOB SnippetHeaders ${PHYSX_ROOT_DIR}/snippets/snippet${SNIPPET_NAME_LOWER}/*.h)
+FILE(GLOB SnippetSources ${SNIPPETS_ROOT_DIR}/snippet${SNIPPET_NAME_LOWER}/*.cpp)
+FILE(GLOB SnippetHeaders ${SNIPPETS_ROOT_DIR}/snippet${SNIPPET_NAME_LOWER}/*.h)
 
 ADD_EXECUTABLE(Snippet${SNIPPET_NAME} ${SNIPPET_BUNDLE}
 	${SNIPPET_PLATFORM_SOURCES}
@@ -55,6 +55,7 @@ TARGET_COMPILE_DEFINITIONS(Snippet${SNIPPET_NAME}
 )
 
 IF(NV_USE_GAMEWORKS_OUTPUT_DIRS)
+	message(FATAL ERROR "using gameworks; this is wrong")
 	SET_TARGET_PROPERTIES(Snippet${SNIPPET_NAME} PROPERTIES 
 		RUNTIME_OUTPUT_DIRECTORY_DEBUG ${PX_EXE_OUTPUT_DIRECTORY_DEBUG}${EXE_PLATFORM_DIR}
 		RUNTIME_OUTPUT_DIRECTORY_PROFILE ${PX_EXE_OUTPUT_DIRECTORY_PROFILE}${EXE_PLATFORM_DIR}
@@ -75,8 +76,26 @@ ELSE()
 ENDIF()
 
 TARGET_LINK_LIBRARIES(Snippet${SNIPPET_NAME} 
-	PUBLIC PhysXExtensions PhysX PhysXPvdSDK PhysXVehicle PhysXCharacterKinematic PhysXCooking PhysXCommon PhysXFoundation SnippetUtils
+#	PUBLIC PhysXExtensions PhysX PhysXPvdSDK PhysXVehicle PhysXCharacterKinematic PhysXCooking PhysXCommon PhysXFoundation SnippetUtils
+	PUBLIC SnippetUtils
 	PUBLIC ${SNIPPET_PLATFORM_LINKED_LIBS})
+
+foreach(lib PhysXExtensions PhysX PhysXPvdSDK PhysXVehicle PhysXCharacterKinematic PhysXCooking PhysXCommon PhysXFoundation )
+# foreach(lib PhysXExtensions PhysX PhysXPvdSDK PhysXVehicle PhysXCharacterKinematic PhysXCooking PhysXCommon )
+    # look for libraries with expected file suffix "_static_64".
+    # look in external physx build output folder
+    find_library(${lib}_LIB ${lib}_static_64 PATHS
+        /home/eric/projects/physx/PhysX/physx/bin/linux.clang/release/)   
+    # message("${lib}_LIB = ${${lib}_LIB}")
+    list(APPEND physx_libs ${${lib}_LIB})
+endforeach()
+
+target_link_libraries(Snippet${SNIPPET_NAME} PUBLIC
+    ${physx_libs}
+    # rt
+    pthread
+    # dl
+    )
 
 IF(CUSTOM_SNIPPET_TARGET_PROPERTIES)
 	SET_TARGET_PROPERTIES(Snippet${SNIPPET_NAME} PROPERTIES 
